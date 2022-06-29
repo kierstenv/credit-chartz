@@ -4,9 +4,9 @@ const CACHE_NAME = APP_PREFIX + VERSION;
 
 const FILES_TO_CACHE = [
   "../index.html",
-  "../css/style.css",
-  "../js/idb.js",
-  "../js/index.js",
+  "./public/css/style.css",
+  "./public/js/idb.js",
+  "./public/js/index.js",
 ];
 
 self.addEventListener('fetch', function(e) {
