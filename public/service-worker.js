@@ -1,4 +1,4 @@
-const APP_PREFIX = "credit-chartz-";
+const APP_PREFIX = "credit_chartz-";
 const VERSION = "version_01";
 const CACHE_NAME = APP_PREFIX + VERSION;
 
