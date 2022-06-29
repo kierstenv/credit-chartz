@@ -24,8 +24,5 @@
     "idb": "^7.0.2",
     "mongoose": "^5.13.14",
     "morgan": "^1.9.1"
-  },
-  "devDependencies": {
-    "webpack-pwa-manifest": "^4.0.0"
   }
 }
