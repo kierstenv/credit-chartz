@@ -29,17 +29,19 @@ self.addEventListener('install', function(e) {
       console.log('installing cache : ' + CACHE_NAME);
       return cache.addAll(FILES_TO_CACHE);
     })
-    )
-  })
+  )
+})
   
-  self.addEventListener('activate', function(e) {
-    e.waitUntil(
-      caches.keys().then(function(keyList) {
-        let cacheKeeplist = keyList.filter(function(key) {
-          return key.indexOf(APP_PREFIX);
-        });
-        cacheKeeplist.push(CACHE_NAME);
-        return Promise.all(keyList.map(function(key, i) {
+self.addEventListener('activate', function(e) {
+  e.waitUntil(
+    caches.keys().then(function(keyList) {
+      let cacheKeeplist = keyList.filter(function(key) {
+        return key.indexOf(APP_PREFIX);
+      });
+      cacheKeeplist.push(CACHE_NAME);
+
+      return Promise.all(
+        keyList.map(function(key, i) {
           if (cacheKeeplist.indexOf(key) === -1) {
             console.log('deleting cache : ' + keyList[i] );
             return caches.delete(keyList[i]);
