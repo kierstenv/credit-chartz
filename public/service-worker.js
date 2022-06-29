@@ -9,14 +9,6 @@ const FILES_TO_CACHE = [
   "/js/index.js",
 ];
 
-self.addEventListener('fetch', function(e) {
-  console.log('fetch request : ' + e.request.url)
-  e.respondWith(
-    caches.match(e.request).then(function(request) {
-      return request || fetch(e.request);
-  }))
-});
-
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
@@ -26,11 +18,11 @@ self.addEventListener('install', function(e) {
     );
   });
   
-self.addEventListener('activate', function(e) {
-  e.waitUntil(
-    caches.keys().then(function(keyList) {
-    let cacheKeeplist = keyList.filter(function(key) {
-      return key.indexOf(APP_PREFIX);
+  self.addEventListener('activate', function(e) {
+    e.waitUntil(
+      caches.keys().then(function(keyList) {
+        let cacheKeeplist = keyList.filter(function(key) {
+          return key.indexOf(APP_PREFIX);
     });
     cacheKeeplist.push(CACHE_NAME);
     return Promise.all(keyList.map(function(key, i) {
@@ -40,4 +32,12 @@ self.addEventListener('activate', function(e) {
       }
     }));
   }));
+  
+  self.addEventListener('fetch', function(e) {
+    console.log('fetch request : ' + e.request.url)
+    e.respondWith(
+      caches.match(e.request).then(function(request) {
+        return request || fetch(e.request);
+    }))
+  });
 });
