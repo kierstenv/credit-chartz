@@ -6,7 +6,7 @@ const FILES_TO_CACHE = [
   "index.html",
   "js/index.js",
   "js/idb.js",
-  "css/styles.css",
+  "css/styles.css"
 ];
 
 self.addEventListener('fetch', function(e) {
@@ -21,7 +21,7 @@ self.addEventListener('fetch', function(e) {
         return fetch(e.request)
       }
   }))
-});
+})
 
 self.addEventListener('install', function(e) {
   e.waitUntil(
@@ -29,21 +29,23 @@ self.addEventListener('install', function(e) {
       console.log('installing cache : ' + CACHE_NAME);
       return cache.addAll(FILES_TO_CACHE);
     })
-    );
-  });
+    )
+  })
   
   self.addEventListener('activate', function(e) {
     e.waitUntil(
       caches.keys().then(function(keyList) {
         let cacheKeeplist = keyList.filter(function(key) {
           return key.indexOf(APP_PREFIX);
-    });
-    cacheKeeplist.push(CACHE_NAME);
-    return Promise.all(keyList.map(function(key, i) {
-      if (cacheKeeplist.indexOf(key) === -1) {
-        console.log('deleting cache : ' + keyList[i] );
-        return caches.delete(keyList[i]);
-      }
-    }));
-  }));
+        });
+        cacheKeeplist.push(CACHE_NAME);
+        return Promise.all(keyList.map(function(key, i) {
+          if (cacheKeeplist.indexOf(key) === -1) {
+            console.log('deleting cache : ' + keyList[i] );
+            return caches.delete(keyList[i]);
+          }
+        })
+      );
+    )
+  );
 });
