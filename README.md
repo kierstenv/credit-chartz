@@ -6,9 +6,9 @@
 
   ![Credit-Charts preview](./public/images/preview.png)
 
-  <!-- ## Usage
+  ## Usage
 
-  Try [Credit Charts](heroku)! -->
+  Try [Credit Charts](https://credit-charts.herokuapp.com/)!
 
   ## License
 
