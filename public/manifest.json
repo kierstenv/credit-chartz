@@ -46,6 +46,5 @@
   "theme_color": "#000000",
   "background_color": "#d7d2fc",
   "start_url": "https://credit-charts.herokuapp.com",
-  "scope": "/",
   "display": "standalone"
 }
