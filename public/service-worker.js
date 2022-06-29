@@ -10,15 +10,15 @@ const FILES_TO_CACHE = [
 ];
 
 self.addEventListener('fetch', function(e) {
-  console.log('fetch request : ' + event.request.url)
-  event.respondWith(
-    caches.match(event.request).then(function(request) {
-      return request || fetch(event.request);
+  console.log('fetch request : ' + e.request.url)
+  e.respondWith(
+    caches.match(e.request).then(function(request) {
+      return request || fetch(e.request);
   }))
 });
 
 self.addEventListener('install', function(e) {
-  event.waitUntil(
+  e.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       console.log('installing cache : ' + CACHE_NAME);
       return cache.addAll(FILES_TO_CACHE);
@@ -27,7 +27,7 @@ self.addEventListener('install', function(e) {
   });
   
 self.addEventListener('activate', function(e) {
-  event.waitUntil(
+  e.waitUntil(
     caches.keys().then(function(keyList) {
     let cacheKeeplist = keyList.filter(function(key) {
       return key.indexOf(APP_PREFIX);
